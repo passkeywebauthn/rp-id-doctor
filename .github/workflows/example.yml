@@ -1,10 +1,11 @@
 # Example: gate a deploy on a healthy passkey configuration.
 # Copy this into your own repository's .github/workflows/ and adjust the values.
+#
+# It is set to `workflow_dispatch` so it does NOT run automatically inside this
+# repository — in your own repo, switch it to `on: [pull_request, push]`.
 name: passkey-config-check
 on:
-  pull_request:
-  push:
-    branches: [main]
+  workflow_dispatch:
 jobs:
   rp-id-doctor:
     runs-on: ubuntu-latest
@@ -12,7 +13,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
       # When published, reference the action as:
       #   uses: passkeywebauthn/rp-id-doctor@v1
       - uses: ./
