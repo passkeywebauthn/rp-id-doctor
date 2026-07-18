@@ -1,0 +1,33 @@
+name: "rp-id-doctor"
+description: "Validate a WebAuthn Relying Party's rpId / origin / related-origin configuration in CI."
+branding:
+  icon: "shield"
+  color: "green"
+inputs:
+  rp-id:
+    description: "The Relying Party ID, e.g. example.com"
+    required: true
+  origins:
+    description: "Whitespace- or newline-separated list of expected origins, e.g. https://login.example.com"
+    required: true
+  strict:
+    description: "Treat warnings as failures"
+    required: false
+    default: "false"
+  network:
+    description: "Perform network probes (.well-known fetch, TLS reachability)"
+    required: false
+    default: "true"
+runs:
+  using: "composite"
+  steps:
+    - name: Run rp-id-doctor
+      shell: bash
+      run: |
+        args=(--rp-id "${{ inputs.rp-id }}")
+        for origin in ${{ inputs.origins }}; do
+          args+=(--origin "$origin")
+        done
+        if [ "${{ inputs.strict }}" = "true" ]; then args+=(--strict); fi
+        if [ "${{ inputs.network }}" != "true" ]; then args+=(--no-network); fi
+        node "${{ github.action_path }}/bin/rp-id-doctor.js" "${args[@]}"

@@ -1,0 +1,51 @@
+{
+  "name": "rp-id-doctor",
+  "version": "0.1.0",
+  "description": "Validate a WebAuthn Relying Party's rpId, origins, and .well-known/webauthn related-origin config — catch the classic 'passkey works on localhost but not production' misconfigurations before you ship. CLI + GitHub Action.",
+  "keywords": [
+    "webauthn",
+    "passkey",
+    "passkeys",
+    "fido2",
+    "rpid",
+    "relying-party",
+    "related-origin-requests",
+    "well-known",
+    "origin",
+    "cli",
+    "github-action",
+    "linter",
+    "preflight"
+  ],
+  "homepage": "https://www.passkeywebauthn.com",
+  "bugs": {
+    "url": "https://github.com/passkeywebauthn/rp-id-doctor/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/passkeywebauthn/rp-id-doctor.git"
+  },
+  "license": "MIT",
+  "author": "passkeywebauthn",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "main": "./src/index.js",
+  "bin": {
+    "rp-id-doctor": "./bin/rp-id-doctor.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "action.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test \"test/*.test.js\""
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
